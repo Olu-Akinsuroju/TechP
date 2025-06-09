@@ -6,6 +6,7 @@ from django.conf.urls.static import static # To serve static files during develo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('app.urls')), # Add this line
     path('api/', include('api.urls')),  # Include your app's URLs
     # Catch-all for React routing, serves index.html
     # This should be the last URL pattern

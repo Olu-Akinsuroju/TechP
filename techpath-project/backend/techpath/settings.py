@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-placeholder-replace-me-in-production'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['techp-byha.onrender.com',]
+ALLOWED_HOSTS = ['techp-byha.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -25,17 +25,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'corsheaders',
     'api.apps.ApiConfig', # Assuming ApiConfig, verify if app creation named it differently
     'whitenoise',
+    'app', # Add this line
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', # After SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware', # Before CommonMiddleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -48,7 +46,7 @@ ROOT_URLCONF = 'techpath.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'build')], # For React's index.html
+        'DIRS': [os.path.join(BASE_DIR, 'app/templates')], # Modify this line
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -109,9 +107,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/stable/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build') # For collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # For production, collectstatic will gather files here.
+                                                        # For development, Django's runserver will find static files
+                                                        # in app 'static' directories and any directories listed in STATICFILES_DIRS.
+                                                        # Adding a 'static' folder in the root and adding it to STATICFILES_DIRS
+                                                        # is a common pattern for project-wide static files.
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build'), # For React build output
+    os.path.join(BASE_DIR, 'static'), # Tell Django to look for a 'static' folder at the project root.
 ]
 
 # Simplified static files serving for development, WhiteNoise handles production
@@ -120,6 +123,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True # For development, restrict in production
+
+CSRF_TRUSTED_ORIGINS = ['https://techp-byha.onrender.com']
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
