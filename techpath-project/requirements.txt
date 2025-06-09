@@ -1,5 +1,0 @@
-Django
-djangorestframework
-django-cors-headers
-gunicorn
-whitenoise # Added for static files, good practice with Django
