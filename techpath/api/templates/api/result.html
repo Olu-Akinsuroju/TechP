@@ -1,0 +1,20 @@
+{% extends "api/base.html" %}
+
+{% block title %}Your Tech Path{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card text-center">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="card-title mb-4">Your Tech Path Recommendation</h2>
+                <p class="lead">Your Tech Path is: <strong>{{ tech_path }}</strong></p>
+                <span class="badge rounded-pill {{ badge_color }} mb-4 fs-6">{{ match_type }} Match</span>
+                <div class="d-grid">
+                    <a href="{% url "survey" %}" class="btn btn-outline-secondary">Try Again</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

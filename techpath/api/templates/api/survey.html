@@ -1,0 +1,74 @@
+{% extends "api/base.html" %}
+
+{% block title %}Tech Path Survey{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="card-title text-center mb-4">Find Your Tech Path</h2>
+                <form method="POST" action="{% url "result" %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="interest" class="form-label">Why are you interested in tech?</label>
+                        <textarea class="form-control" id="interest" name="interest" rows="3" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <p class="form-label">What tools have you used?</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Terminal" id="tool_terminal" name="tools">
+                            <label class="form-check-label" for="tool_terminal">Terminal</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Figma" id="tool_figma" name="tools">
+                            <label class="form-check-label" for="tool_figma">Figma</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Python" id="tool_python" name="tools">
+                            <label class="form-check-label" for="tool_python">Python</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Excel" id="tool_excel" name="tools">
+                            <label class="form-check-label" for="tool_excel">Excel</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Unity" id="tool_unity" name="tools">
+                            <label class="form-check-label" for="tool_unity">Unity</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="form-label">Which activity excites you most?</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="activity" id="activity_websites" value="building websites" required>
+                            <label class="form-check-label" for="activity_websites">Building websites</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="activity" id="activity_data" value="analyzing data">
+                            <label class="form-check-label" for="activity_data">Analyzing data</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="activity" id="activity_security" value="securing systems">
+                            <label class="form-check-label" for="activity_security">Securing systems</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="activity" id="activity_ui" value="designing UIs">
+                            <label class="form-check-label" for="activity_ui">Designing UIs</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="activity" id="activity_games" value="building games">
+                            <label class="form-check-label" for="activity_games">Building games</label>
+                        </div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
